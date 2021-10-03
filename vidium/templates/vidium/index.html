@@ -1,0 +1,48 @@
+{% extends 'vidium/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="logo">
+    <img src="{% static 'img/vidium_logo.png' %}" alt="Vidium logo">
+</div>
+<div class="p-4 justify-content-center card shadow mb-4">
+    <div id="alert" role="alert"></div>
+    <form class="user">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="gene_name">Gene Name</label>
+                    <select class="form-select" name="gene_name" id="gene_name">
+                        <option selected>Select the gene name</option>
+                        <option value="EZH2">EZH2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <label for="chromosome_id">Chromosome ID</label>
+                <input class="form-control" type="text" id="chromosome_id">
+            </div>
+            <div class="col">
+                <label for="chromosome_start">Chromosome Start</label>
+                <input class="form-control" type="number" id="chromosome_start" onchange="validateChrom()">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="chromosome_end">Chromosome End</label>
+                <input class="form-control" type="number" id="chromosome_end" onchange="validateChrom()">
+            </div>
+            <div class="col">
+                <label for="af_cutoff">AF Cutoff</label>
+                <input class="form-control" type="text" id="af_cutoff">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary mt-4 px-5" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% include './partials/_table.html' %}
+
+{% endblock content %}

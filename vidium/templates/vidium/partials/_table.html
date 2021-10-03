@@ -1,0 +1,62 @@
+{% load static %}
+
+
+<div class="card shadow p-4">
+    <div class="card-head p-3">
+        <div class="row">
+            <div class="col-8">
+                <h4>Genomic Data</h4>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <form action="{% url 'vidium:upload' %}">
+                        {% csrf_token %}
+                        <label class="btn btn-secondary" for="uploadData">Choose file</label>
+                        <input id="uploadData" type="file" value="Browse" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden>
+                        <button type="submit" formmethod="post" class="btn btn-primary" id="submitUpload">
+                            Upload
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">CHROM</th>
+                    <th scope="col">POS</th>
+                    <th scope="col">REF</th>
+                    <th scope="col">ALT</th>
+                    <th scope="col">FILTER</th>
+                    <th scope="col">AF</th>
+                    <th scope="col">VF</th>
+                    <th scope="col">DP</th>
+                    <th scope="col">ALLELE</th>
+                    <th scope="col">EFFECT</th>
+                    <th scope="col">IMPACT</th>
+                    <th scope="col">GENE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gene in genes %}
+                    <tr>
+                        <td>{{gene.chrom}}</td>
+                        <td>{{gene.pos}}</td>
+                        <td>{{gene.ref}}</td>
+                        <td>{{gene.alt}}</td>
+                        <td>{{gene.filter}}</td>
+                        <td>{{gene.af}}</td>
+                        <td>{{gene.vf}}</td>
+                        <td>{{gene.dp}}</td>
+                        <td>{{gene.allele}}</td>
+                        <td>{{gene.effect}}</td>
+                        <td>{{gene.impact}}</td>
+                        <td>{{gene.gene}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
