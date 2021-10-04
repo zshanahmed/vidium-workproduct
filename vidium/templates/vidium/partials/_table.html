@@ -24,25 +24,40 @@
     <div class="card-body">
         <table class="table table-bordered table-hover">
             <thead>
-                <tr>
+                <tr class="text-center"> 
                     <th scope="col">CHROM</th>
                     <th scope="col">POS</th>
                     <th scope="col">REF</th>
                     <th scope="col">ALT</th>
                     <th scope="col">FILTER</th>
-                    <th scope="col"><a href="/sort/AF/DESC">AF</a></th>
+                    <th scope="col">AF
+                        <div>
+                            <a href="/sort/AF/ASC"><small>ASC</small></a>
+                            <a href="/sort/AF/DESC"><small>DESC</small></a>
+                        </div>
+                    </th>
                     <th scope="col">VF</th>
                     <th scope="col">DP</th>
                     <th scope="col">ALLELE</th>
                     <th scope="col">EFFECT</th>
-                    <th scope="col"><a href="/sort/IMPACT/DESC">IMPACT</a></th>
-                    <th scope="col"><a href="/sort/GENE/DESC">GENE</a></th>
+                    <th scope="col">IMPACT</a>
+                        <div>
+                            <a href="/sort/IMPACT/ASC"><small>ASC</small></a>
+                            <a href="/sort/IMPACT/DESC"><small>DESC</small></a>
+                        </div>
+                    </th>
+                    <th scope="col">GENE</a>
+                        <div>
+                            <a href="/sort/GENE/ASC"><small>ASC</small></a>
+                            <a href="/sort/GENE/DESC"><small>DESC</small></a>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for gene in genes %}
-                    <tr>
-                        <td>{{gene.chrom}}</td>
+                    <tr class="text-center"> 
+                        <td >{{gene.chrom}}</td>
                         <td>{{gene.pos}}</td>
                         <td>{{gene.ref}}</td>
                         <td>{{gene.alt}}</td>

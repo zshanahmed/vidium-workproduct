@@ -18,7 +18,8 @@
 
 <div class="p-4 justify-content-center card shadow mb-4">
     <div id="alert"></div>
-    <form class="user">
+    <form class="user" method="post" action="{% url 'vidium:index'%}">
+        {% csrf_token %}
         <div class="row mb-3">
             <div class="col">
                 <div class="form-group">
