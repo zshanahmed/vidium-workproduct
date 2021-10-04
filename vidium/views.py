@@ -3,6 +3,8 @@ from django.core import serializers
 from django.views.generic import View
 from django.contrib import messages
 from django.http import HttpResponse
+
+from xlrd import XLRDError
 import pandas as pd
 import pdb
 
@@ -98,8 +100,8 @@ class Upload(View):
         """
         try:
             df = pd.read_excel(datafile, na_values=['None']) # For xlsx format
-        except UnicodeDecodeError:
-            df = pd.read_csv(datfile) # For csv format
+        except XLRDError:
+            df = pd.read_csv(datafile) # For csv format
         df_dict = df.to_dict('index')
         for item in df_dict.items(): # Going through dict from file
             gene_dict = item[1]
