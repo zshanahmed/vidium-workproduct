@@ -46,11 +46,11 @@
                 <input name="chromosome_end" class="form-control" type="number" id="chromosome_end" onchange="validateChrom()" onkeyup="validateChrom()">
             </div>
             <div class="col">
-                <label for="af_cutoff">AF Cutoff</label>
-                <input name="af_cutoff" class="form-control" type="text" id="af_cutoff">
+                <label for="af_cutoff">AF Cutoff (<=)</label>
+                <input name="af_cutoff" class="form-control" type="text" id="af_cutoff" onkeyup="validateAF()">
             </div>
             <div class="col">
-                <button class="btn btn-primary mt-4 px-5" type="submit">Search</button>
+                <button class="btn btn-primary mt-4 px-4" type="submit"><i class="fas fa-search"></i> Search</button>
             </div>
         </div>
     </form>

@@ -14,8 +14,11 @@ class Index(View):
         if get_dict:
             start = get_dict['chromosome_start'][0]
             end = get_dict['chromosome_end'][0]
+            af_cutoff = get_dict['af_cutoff'][0]
             if ((start and end) and (int(start) > int(end))):
                 messages.warning(request, 'Chromosome start cannot be greater than chromosome end')
+            if (af_cutoff and int(af_cutoff) > 1):
+                messages.warning(request, 'AF Cutoff cannot be greater than 1')
                 return redirect('vidium:index')
         for key, value in get_dict.items():
             value = value[0]
@@ -59,6 +62,6 @@ class Upload(View):
         
     def upload(request):
         datafile = request.FILES['file']
-        values = process_file(datafile)
+        values = Upload.process_file(datafile)
         print(values)
         return redirect('vidium:index')
