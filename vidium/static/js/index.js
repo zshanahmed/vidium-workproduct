@@ -13,6 +13,17 @@ function validateChrom() {
     }
 }
 
+function validateAF(){
+    const afValue = document.querySelector('#af_cutoff').value;
+    const small = document.querySelector('#af-note');
+    if (afValue > 1){
+        small.textContent = '*AF Value cannot be greater than 1';
+        small.className = 'note';
+    } else {
+        small.textContent = "";
+    }
+}
+
 (function ($) {
 
     $('input[type="file"]').change(function(e){
