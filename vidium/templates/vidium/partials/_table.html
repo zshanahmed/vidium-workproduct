@@ -1,25 +1,25 @@
 {% load static %}
 
-
 <div class="card shadow p-4">
     <div class="card-head p-3">
         <div class="row">
-            <div class="col-8">
+            <div class="col-6">
                 <h4>Genomic Data</h4>
             </div>
-            <div class="col-4">
-                <div class="form-group">
-                    <form action="{% url 'vidium:upload' %}">
+            <div class="col-6">
+                <div class="form-group p-2">
+                    <form action="{% url 'vidium:upload'%}" method="post" enctype="multipart/form-data" class="user text-center col-12">
+                        <span class="mt-3">Upload file to populate table:</span>
                         {% csrf_token %}
-                        <label class="btn btn-secondary" for="uploadData">Choose file</label>
-                        <input id="uploadData" type="file" value="Browse" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden>
-                        <button type="submit" formmethod="post" class="btn btn-primary" id="submitUpload">
-                            Upload
+                        <label id="uploadCsvLabel" for="uploadCsv" class="btn btn-primary">Choose File <i class="fas fa-file"></i></label>
+                        <input id="uploadCsv" type="file" value="Browse" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden>
+                        <button type="submit" formmethod="post" class="btn btn-outline-secondary" id="submitUpload">
+                            Upload <i class="fas fa-upload"></i>
                         </button>
                     </form>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="card-body">
         <table class="table table-bordered table-hover">
@@ -30,13 +30,13 @@
                     <th scope="col">REF</th>
                     <th scope="col">ALT</th>
                     <th scope="col">FILTER</th>
-                    <th scope="col">AF</th>
+                    <th scope="col"><a href="/sort/AF/DESC">AF</a></th>
                     <th scope="col">VF</th>
                     <th scope="col">DP</th>
                     <th scope="col">ALLELE</th>
                     <th scope="col">EFFECT</th>
-                    <th scope="col">IMPACT</th>
-                    <th scope="col">GENE</th>
+                    <th scope="col"><a href="/sort/IMPACT/DESC">IMPACT</a></th>
+                    <th scope="col"><a href="/sort/GENE/DESC">GENE</a></th>
                 </tr>
             </thead>
             <tbody>

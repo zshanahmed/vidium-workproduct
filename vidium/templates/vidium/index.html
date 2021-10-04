@@ -3,38 +3,51 @@
 {% load static %}
 {% block content %}
 <div class="logo">
-    <img src="{% static 'img/vidium_logo.png' %}" alt="Vidium logo">
+    <a href="{% url 'vidium:index' %}">
+        <img src="{% static 'img/vidium_logo.png' %}" alt="Vidium logo">
+    </a>
 </div>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible text-center fade show" role="alert">
+        <strong>Warning!</strong> {{message}}
+    </div>
+    {% endfor %}
+{% endif %}
+
 <div class="p-4 justify-content-center card shadow mb-4">
-    <div id="alert" role="alert"></div>
+    <div id="alert"></div>
     <form class="user">
         <div class="row mb-3">
             <div class="col">
                 <div class="form-group">
                     <label for="gene_name">Gene Name</label>
-                    <select class="form-select" name="gene_name" id="gene_name">
+                    <select class="form-select" name="gene" id="gene_name">
                         <option selected>Select the gene name</option>
-                        <option value="EZH2">EZH2</option>
+                        {% for name in values %}
+                        <option value="{{ name }}">{{name}}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
             <div class="col">
                 <label for="chromosome_id">Chromosome ID</label>
-                <input class="form-control" type="text" id="chromosome_id">
+                <input name="chromosome_id" class="form-control" type="text" id="chromosome_id">
             </div>
             <div class="col">
                 <label for="chromosome_start">Chromosome Start</label>
-                <input class="form-control" type="number" id="chromosome_start" onchange="validateChrom()">
+                <input name="chromosome_start" class="form-control" type="number" id="chromosome_start" onchange="validateChrom()" onkeyup="validateChrom()">
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <label for="chromosome_end">Chromosome End</label>
-                <input class="form-control" type="number" id="chromosome_end" onchange="validateChrom()">
+                <input name="chromosome_end" class="form-control" type="number" id="chromosome_end" onchange="validateChrom()" onkeyup="validateChrom()">
             </div>
             <div class="col">
                 <label for="af_cutoff">AF Cutoff</label>
-                <input class="form-control" type="text" id="af_cutoff">
+                <input name="af_cutoff" class="form-control" type="text" id="af_cutoff">
             </div>
             <div class="col">
                 <button class="btn btn-primary mt-4 px-5" type="submit">Search</button>

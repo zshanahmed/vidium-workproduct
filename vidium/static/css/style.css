@@ -20,6 +20,10 @@ input[type=number] {
     padding: 3rem 0rem;
 }
 
+.note {
+  color: red;
+}
+
 label {
     font-weight: 500;
 }
