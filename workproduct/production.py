@@ -1,4 +1,5 @@
 from .settings import *
+import dj_database_url
 import os
 
 # Configure the domain name using the environment variable
@@ -29,11 +30,7 @@ hostname = os.environ['DBHOST']
 # Configure Postgres database; the full username is username@servername,
 # which we construct using the DBHOST value.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['DBNAME'],
-        'HOST': hostname + ".postgres.database.azure.com",
-        'USER': os.environ['DBUSER'] + "@" + hostname,
-        'PASSWORD': os.environ['DBPASS'] 
-    }
+    'default': {dj_database_url.config(os.environ['DATABASE_URL'] , conn_max_age=600)}
 }
+
+postgres://auosersuhhmbno:db05ed7d67672a3990259a9068c794f11e782441ea78469ea3cd0f91db66ddaa@ec2-18-214-214-252.compute-1.amazonaws.com:5432/d2cjf9lrivt8tp
