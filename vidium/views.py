@@ -15,26 +15,30 @@ class Index(View):
     def get(self, request):
         get_dict = dict(request.GET)
         genes = Gene.objects.all()
+        flag = False
+
         if get_dict:
             start = get_dict['chromosome_start'][0]
             end = get_dict['chromosome_end'][0]
             af_cutoff = get_dict['af_cutoff'][0]
             if ((start and end) and (int(start) > int(end))):
+                flag = True
                 messages.warning(request, 'Chromosome start cannot be greater than chromosome end')
             if (af_cutoff and int(af_cutoff) > 1):
+                flag = True
                 messages.warning(request, 'AF Cutoff cannot be greater than 1')
-                return redirect('vidium:index')
-        for key, value in get_dict.items():
-            value = value[0]
-            if value:
-                if key == "chromosome_start":
-                    genes = genes.filter(pos__gte=value)
-                elif key == "chromosome_end":
-                    genes = genes.filter(pos__lte=value)
-                elif key == "af_cutoff":
-                    genes = genes.filter(af__lte=value)
-                else:
-                    genes =genes.filter(gene=value)
+        if not flag:
+            for key, value in get_dict.items():
+                value = value[0]
+                if value:
+                    if key == "chromosome_start":
+                        genes = genes.filter(pos__gte=value)
+                    elif key == "chromosome_end":
+                        genes = genes.filter(pos__lte=value)
+                    elif key == "af_cutoff":
+                        genes = genes.filter(af__lte=value)
+                    else:
+                        genes =genes.filter(gene=value)
         values = Gene.objects.order_by('gene').values_list('gene').distinct()
         values = map(lambda x: x[0], values)
         return render(request, 'vidium/index.html', context = { 'genes' : genes, 'values': values })
