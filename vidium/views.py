@@ -37,7 +37,7 @@ class Index(View):
                     elif key == "af_cutoff":
                         genes = genes.filter(af__lte=float(value))
                     elif key == 'chromosome_id':
-                        genes = genes.filter(chrom__icontains=value)
+                        genes = genes.filter(chrom=value)
                     elif key == 'gene':
                         if value != ('Select the gene name'):
                             genes = genes.filter(gene=value)
