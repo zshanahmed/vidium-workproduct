@@ -3,6 +3,7 @@ from django.conf.urls import url
 from . import views
 
 app_name = 'vidium'
+handler404 = 'vidium.views.handler404'
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('upload/', views.Upload.upload, name='upload'),

@@ -7,6 +7,10 @@ import pandas as pd
 from .models import Gene;
 # Create your views here.
 
+def handler404(request, *args, **argv):
+    response = render(request, '404.html')
+    return response
+
 class Index(View):
     def get(self, request):
         get_dict = dict(request.GET)
