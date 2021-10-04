@@ -61,7 +61,9 @@ class Upload(View):
         return gene_values
         
     def upload(request):
-        datafile = request.FILES['file']
-        values = Upload.process_file(datafile)
-        print(values)
+        if not request.FILES:
+            messages.warning(request, 'Please select a file to upload!')
+        else: 
+            datafile = request.FILES['file']
+            values = Upload.process_file(datafile)
         return redirect('vidium:index')
